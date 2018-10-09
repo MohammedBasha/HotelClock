@@ -2,13 +2,17 @@
     "use strict";
 
     document.addEventListener("DOMContentLoaded", function () {
-        const c = document.getElementById("current-time");
+        const currentTime = document.getElementById("current-time"),
+              currentDate = document.getElementById("current-date"),
+              months =  ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
 
         function updateTime() {
-            var d = new Date(),
-                hours = d.getHours(),
-                minutes = d.getMinutes(),
-                sepClass = (d.getSeconds() % 2 === 0) ? "" : "trans",
+            var date = new Date(),
+                month = date.getMonth(),
+                monthDay = date.getDate(),
+                hours = date.getHours(),
+                minutes = date.getMinutes(),
+                sepClass = (date.getSeconds() % 2 === 0) ? "" : "trans",
                 sep = "<span class='" + sepClass + "'>:</span>",
                 am_pm = (hours > 12) ? "PM" : "AM";
 
@@ -21,7 +25,8 @@
             hours = (hours < 10) ? "0" + hours : hours;
             minutes = (minutes < 10) ? "0" + minutes : minutes;
 
-            c.innerHTML = hours + sep + minutes + " " + am_pm;
+            currentTime.innerHTML = hours + sep + minutes + " " + am_pm;
+            currentDate.textContent = months[month] + " " + monthDay;
         }
 
         setInterval(updateTime, 1000);
